@@ -27,6 +27,35 @@ function SinglePage() {
     }
   };
 
+  const handleSendMessage = async () => {
+    // Check if user is logged in
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+
+    // Check if user is trying to message themselves
+    if (currentUser.id === post.user.id) {
+      alert("You cannot send a message to yourself!");
+      return;
+    }
+
+    try {
+      // Try to create a new chat or get existing one
+      const res = await apiRequest.post("/chats", {
+        receiverId: post.user.id
+      });
+      
+      // Navigate to profile page where chats are displayed
+      navigate("/profile");
+    } catch (err) {
+      console.log("Error creating chat:", err);
+      // Even if there's an error (like chat already exists), navigate to profile
+      // The existing chat will be shown there
+      navigate("/profile");
+    }
+  };
+
   return (
     <div className="singlePage">
       <div className="details">
@@ -139,7 +168,7 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
-            <button>
+            <button onClick={handleSendMessage}>
               <img src="/chat.png" alt="" />
               Send a Message
             </button>

@@ -1,8 +1,5 @@
 import prisma from "../lib/prisma.js";
 
-
-
-
 export const getChats = async (req, res) => {
     const tokenUserId = req.userId;
 
@@ -37,13 +34,6 @@ export const getChats = async (req, res) => {
         res.status(500).json({ message: "Failed to get chats!" });
     }
 };
-
-
-
-
-
-
-
 
 export const getChat = async (req, res) => {
     const tokenUserId = req.userId;
@@ -82,21 +72,40 @@ export const getChat = async (req, res) => {
     }
 };
 
-
-
-
-
-
-
-
 export const addChat = async (req, res) => {
     const tokenUserId = req.userId;
+    const receiverId = req.body.receiverId;
+    
     try {
-        const newChat = await prisma.chat.create({
-            data: {
-                userIDs: [tokenUserId, req.body.receiverId],
+        // Check if chat already exists between these two users
+        const existingChat = await prisma.chat.findFirst({
+            where: {
+                AND: [
+                    {
+                        userIDs: {
+                            hasEvery: [tokenUserId, receiverId],
+                        },
+                    },
+                    {
+                        userIDs: {
+                            array_length: 2, // Ensure it's exactly these two users
+                        },
+                    },
+                ],
             },
         });
+
+        if (existingChat) {
+            return res.status(200).json(existingChat);
+        }
+
+        // Create new chat if it doesn't exist
+        const newChat = await prisma.chat.create({
+            data: {
+                userIDs: [tokenUserId, receiverId],
+            },
+        });
+        
         res.status(200).json(newChat);
     } catch (err) {
         console.log(err);
@@ -104,15 +113,8 @@ export const addChat = async (req, res) => {
     }
 };
 
-
-
-
-
-
-
 export const readChat = async (req, res) => {
     const tokenUserId = req.userId;
-
 
     try {
         const chat = await prisma.chat.update({
