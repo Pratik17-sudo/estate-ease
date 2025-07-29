@@ -13,6 +13,10 @@ import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import ChatPage from "./routes/chatPage/chatPage"
 import NewPostPage from "./routes/newPostPage/newPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader, chatPageLoader } from "./lib/loaders";
+import { imageOverlay } from "leaflet";
+
+
+
 
 function App() {
   const router = createBrowserRouter([
