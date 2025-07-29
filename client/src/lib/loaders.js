@@ -24,3 +24,10 @@ export const profilePageLoader = async () => {
         chatResponse: chatPromise,
     });
 };
+
+
+
+export const chatPageLoader = async () => {
+    const res = await apiRequest("/chats");
+    return res.data;
+};

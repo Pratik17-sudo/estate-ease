@@ -28,33 +28,34 @@ function SinglePage() {
   };
 
   const handleSendMessage = async () => {
-    // Check if user is logged in
-    if (!currentUser) {
-      navigate("/login");
-      return;
-    }
+  if (!currentUser) {
+    navigate("/login");
+    return;
+  }
 
-    // Check if user is trying to message themselves
-    if (currentUser.id === post.user.id) {
-      alert("You cannot send a message to yourself!");
-      return;
-    }
+  if (currentUser.id === post.user.id) {
+    alert("You cannot send a message to yourself!");
+    return;
+  }
 
-    try {
-      // Try to create a new chat or get existing one
-      const res = await apiRequest.post("/chats", {
-        receiverId: post.user.id
-      });
-      
-      // Navigate to profile page where chats are displayed
-      navigate("/profile");
-    } catch (err) {
-      console.log("Error creating chat:", err);
-      // Even if there's an error (like chat already exists), navigate to profile
-      // The existing chat will be shown there
-      navigate("/profile");
-    }
-  };
+  if (!post?.user?.id) {
+    alert("Unable to contact post owner. Please try again.");
+    return;
+  }
+
+  try {
+    const res = await apiRequest.post("/chats", {
+      receiverId: post.user.id,
+    });
+
+    // Redirect to that specific chat directly
+    navigate(`/profile/chats/${res.data.id}`);
+  } catch (err) {
+    console.error("Failed to send message", err);
+    alert("Something went wrong while sending message.");
+  }
+};
+
 
   return (
     <div className="singlePage">
