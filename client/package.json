@@ -14,6 +14,7 @@
     "axios": "^1.11.0",
     "dompurify": "^3.2.6",
     "estateui": "file:",
+    "framer-motion": "^12.23.12",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
