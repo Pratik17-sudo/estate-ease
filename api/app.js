@@ -32,11 +32,11 @@ app.use("/api/test", (req, res) => {
     res.send("It works");
 });
 
-if (process.env.NODE_ENV !== "production") {
-    app.listen(8800, () => {
-        console.log("Server running on port 8800");
-    });
-}
+
+app.listen(8800, () => {
+    console.log("Server running on port 8800");
+});
+
 
 export default app;
 
