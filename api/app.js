@@ -39,3 +39,5 @@ app.listen(8800, () => {
 
 
 export default app;
+module.exports = app;
+
