@@ -1,117 +1,119 @@
-.chat {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+// @import "../../responsive.scss";
 
-  .messages {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: scroll;
+// .chat {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
 
-    h1 {
-      font-weight: 300;
-    }
+//   .messages {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 20px;
+//     overflow-y: scroll;
 
-    .message {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      cursor: pointer;
+//     h1 {
+//       font-weight: 300;
+//     }
 
-      img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+//     .message {
+//       background-color: white;
+//       padding: 20px;
+//       border-radius: 10px;
+//       display: flex;
+//       align-items: center;
+//       gap: 20px;
+//       cursor: pointer;
 
-      span {
-        font-weight: bold;
-      }
-    }
-  }
+//       img {
+//         width: 40px;
+//         height: 40px;
+//         border-radius: 50%;
+//         object-fit: cover;
+//       }
 
-  .chatBox {
-    flex: 1;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+//       span {
+//         font-weight: bold;
+//       }
+//     }
+//   }
 
-    .top {
-      background-color: #f7c14b85;
-      padding: 20px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+//   .chatBox {
+//     flex: 1;
+//     background-color: white;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
 
-      .user {
-        display: flex;
-        align-items: center;
-        gap: 20px;
+//     .top {
+//       background-color: #f7c14b85;
+//       padding: 20px;
+//       font-weight: bold;
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
 
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-      }
-      .close {
-        cursor: pointer;
-      }
-    }
-    .center {
-      height: 350px;
-      overflow: scroll;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+//       .user {
+//         display: flex;
+//         align-items: center;
+//         gap: 20px;
 
-      .chatMessage{
-        width: 50%;
+//         img {
+//           width: 30px;
+//           height: 30px;
+//           border-radius: 50%;
+//           object-fit: cover;
+//         }
+//       }
+//       .close {
+//         cursor: pointer;
+//       }
+//     }
+//     .center {
+//       height: 350px;
+//       overflow: scroll;
+//       padding: 20px;
+//       display: flex;
+//       flex-direction: column;
+//       gap: 20px;
 
-        &.own{
-          align-self: flex-end;
-          text-align: right;
-        }
+//       .chatMessage{
+//         width: 50%;
 
-        span{
-          font-size: 12px;
-          background-color: #f7c14b39;
-          padding: 2px;
-          border-radius: 5px;
-        }
-      }
-    }
-    .bottom {
-      border-top: 2px solid #f7c14b85;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+//         &.own{
+//           align-self: flex-end;
+//           text-align: right;
+//         }
 
-      textarea{
-        flex:3;
-        height: 100%;
-        border: none;
-        padding: 20px;
-      }
+//         span{
+//           font-size: 12px;
+//           background-color: #f7c14b39;
+//           padding: 2px;
+//           border-radius: 5px;
+//         }
+//       }
+//     }
+//     .bottom {
+//       border-top: 2px solid #f7c14b85;
+//       height: 60px;
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
 
-      button{
-        flex:1;
-        background-color: #f7c14b85;
-        height: 100%;
-        border: none;
-        cursor: pointer;
-      }
-    }
-  }
-}
+//       textarea{
+//         flex:3;
+//         height: 100%;
+//         border: none;
+//         padding: 20px;
+//       }
+
+//       button{
+//         flex:1;
+//         background-color: #f7c14b85;
+//         height: 100%;
+//         border: none;
+//         cursor: pointer;
+//       }
+//     }
+//   }
+// }
