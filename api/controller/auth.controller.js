@@ -52,46 +52,37 @@ export const register = async (req, res) => {
 
 
 export const login = async (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
-    try {
-        // Check if the user exists
-        const user = await prisma.user.findUnique({
-            where: { username }
-        });
+  try {
+    const user = await prisma.user.findUnique({ where: { username } });
 
-        if (!user) return res.status(401).json({ message: "Invalid Credentials" });
+    if (!user) return res.status(401).json({ message: "Invalid Credentials" });
 
-        // Check if the password is correct
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) return res.status(401).json({ message: "Invalid Credentials" });
-        
-        // console.log("JWT_SECRET_KEY:", process.env.JWT_SECRET_KEY);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) return res.status(401).json({ message: "Invalid Credentials" });
 
+    const age = 1000 * 60 * 60 * 24 * 7; // 7 days
+    const token = jwt.sign(
+      { id: user.id, isAdmin: false },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: age }
+    );
 
-        // Generate JWT token
-        const age = 1000 * 60 * 24 * 7;
-        const token = jwt.sign(
-            { id: user.id, isAdmin: false },
-            process.env.JWT_SECRET_KEY, 
-            { expiresIn: age }
-        );
+    const { password: userPassword, ...userInfo } = user;
 
-        const { password:userPassword, ...userInfo}=user;
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,         // ✅ for HTTPS (vercel/render)
+      sameSite: "None",     // ✅ for cross-site cookie support
+      maxAge: age,
+    }).status(200).json(userInfo);
 
-        // Set cookie and respond
-        res.cookie("token", token, {  
-            httpOnly: true,
-            maxAge: age,
-        }).status(200).json(userInfo);
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Failed to login!" });
-    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to login!" });
+  }
 };
-
-
 
 
 
